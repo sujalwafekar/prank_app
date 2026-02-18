@@ -288,11 +288,25 @@
         }
 
         @keyframes bg-flash {
-            0% { background-color: #000; }
-            25% { background-color: #200; }
-            50% { background-color: #000; }
-            75% { background-color: #002; }
-            100% { background-color: #000; }
+            0% {
+                background-color: #000;
+            }
+
+            25% {
+                background-color: #200;
+            }
+
+            50% {
+                background-color: #000;
+            }
+
+            75% {
+                background-color: #002;
+            }
+
+            100% {
+                background-color: #000;
+            }
         }
 
         .shaker {
@@ -301,10 +315,27 @@
         }
 
         @keyframes shake {
-            10%, 90% { transform: translate3d(-2px, 0, 0); }
-            20%, 80% { transform: translate3d(4px, 0, 0); }
-            30%, 50%, 70% { transform: translate3d(-8px, 0, 0); }
-            40%, 60% { transform: translate3d(8px, 0, 0); }
+
+            10%,
+            90% {
+                transform: translate3d(-2px, 0, 0);
+            }
+
+            20%,
+            80% {
+                transform: translate3d(4px, 0, 0);
+            }
+
+            30%,
+            50%,
+            70% {
+                transform: translate3d(-8px, 0, 0);
+            }
+
+            40%,
+            60% {
+                transform: translate3d(8px, 0, 0);
+            }
         }
 
         body.show-cookie-blocker::after {
@@ -326,7 +357,9 @@
         }
 
         @keyframes blink {
-            50% { opacity: 0; }
+            50% {
+                opacity: 0;
+            }
         }
 
         /* ----------------------- */
@@ -334,7 +367,8 @@
         /* ----------------------- */
         @media (max-width: 768px) {
             body {
-                display: block; /* No grid on mobile */
+                display: block;
+                /* No grid on mobile */
                 height: 100vh;
                 width: 100vw;
                 position: relative;
@@ -347,8 +381,10 @@
                 left: 0;
                 width: 100%;
                 height: auto;
-                max-height: 250px; /* Peek or small */
-                transform: translateY(100%); /* Hidden by default */
+                max-height: 250px;
+                /* Peek or small */
+                transform: translateY(100%);
+                /* Hidden by default */
                 transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                 border-right: none;
                 border-top: 2px solid var(--accent-color);
@@ -371,14 +407,15 @@
                 top: 15px;
                 right: 15px;
                 font-size: 0.8rem;
-                background: rgba(0,0,0,0.5);
+                background: rgba(0, 0, 0, 0.5);
                 padding: 5px 10px;
                 border: 1px solid var(--accent-color);
                 border-radius: 4px;
             }
 
             .logo {
-                display: none; /* Hide logo in sidebar to save space */
+                display: none;
+                /* Hide logo in sidebar to save space */
             }
 
             /* Mobile Header Logo */
@@ -397,7 +434,8 @@
             /* CENTERED AND HUGE BUTTON */
             .init-btn-container {
                 bottom: 50%;
-                transform: translate(-50%, 50%); /* Centered verticallyish */
+                transform: translate(-50%, 50%);
+                /* Centered verticallyish */
                 width: 90%;
             }
 
@@ -422,9 +460,18 @@
             }
 
             @keyframes pulse-glow {
-                0% { box-shadow: 0 0 10px rgba(0, 243, 255, 0.2); }
-                50% { box-shadow: 0 0 30px rgba(0, 243, 255, 0.6); border-color: #fff; }
-                100% { box-shadow: 0 0 10px rgba(0, 243, 255, 0.2); }
+                0% {
+                    box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+                }
+
+                50% {
+                    box-shadow: 0 0 30px rgba(0, 243, 255, 0.6);
+                    border-color: #fff;
+                }
+
+                100% {
+                    box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+                }
             }
         }
     </style>
@@ -511,10 +558,11 @@
 
             <div style="display: flex; gap: 10px;">
                 <button class="modal-btn" id="save-config">SAVE & DISARM</button>
-                <button class="modal-btn" style="background: #333; color: #fff; border: 1px solid #555;" id="preview-audio">TEST</button>
+                <button class="modal-btn" style="background: #333; color: #fff; border: 1px solid #555;"
+                    id="preview-audio">TEST</button>
             </div>
         </div>
-    </aside>
+        </aside>
     </div>
 
     <script>
@@ -557,11 +605,11 @@
         function resize() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            if(config.isGlitching) return; 
+            if (config.isGlitching) return;
             initParticles(); // Re-init on resize for clean look
         }
         window.addEventListener('resize', resize);
-        
+
         // --- Particle System (The Decoy) ---
         class Particle {
             constructor() {
@@ -611,7 +659,7 @@
         initParticles();
 
         function drawConnections() {
-            if (config.isGlitching) return; 
+            if (config.isGlitching) return;
 
             ctx.strokeStyle = 'rgba(0, 243, 255, 0.1)';
             ctx.lineWidth = 1;
@@ -667,8 +715,8 @@
             document.getElementById('gpu-temp').innerText = Math.floor(Math.random() * 5 + 40) + "°C";
             document.getElementById('entropy').innerText = (Math.random() * 0.01).toFixed(4);
             document.getElementById('fps-counter').innerText = Math.floor(Math.random() * 5 + 58);
-            
-            if(isMobile) {
+
+            if (isMobile) {
                 document.getElementById('m-cpu').innerText = Math.floor(Math.random() * 15 + 10) + "%";
             }
 
@@ -708,7 +756,7 @@
 
             osc.type = 'sawtooth';
             osc.frequency.setValueAtTime(100, audioCtx.currentTime);
-            
+
             // Modulation
             const mod = audioCtx.createOscillator();
             mod.frequency.value = 50;
@@ -746,7 +794,7 @@
         });
 
         saveConfigBtn.addEventListener('click', async () => {
-            if(audioInput.value.trim() !== "") {
+            if (audioInput.value.trim() !== "") {
                 config.audioUrl = audioInput.value;
             }
             config.volume = parseFloat(volInput.value);
@@ -762,10 +810,10 @@
         previewBtn.addEventListener('click', () => {
             // Force user interaction for audio context if needed
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            
+
             const url = audioInput.value || config.audioUrl;
-            if(testAudioEl) testAudioEl.pause();
-            
+            if (testAudioEl) testAudioEl.pause();
+
             testAudioEl = new Audio(url);
             testAudioEl.volume = parseFloat(volInput.value);
             testAudioEl.play().catch(e => {
@@ -801,7 +849,7 @@
                 e.returnValue = "SYSTEM ERROR";
                 return "SYSTEM ERROR";
             });
-            
+
             // 5. History trap
             history.pushState(null, null, location.href);
             window.onpopstate = function () {
@@ -811,11 +859,11 @@
             // 6. Audio Trigger
             // Default to 'prank_sound.mp3' if not overridden
             const urlToPlay = config.audioUrl || 'prank_sound.mp3';
-            
+
             const audio = new Audio(urlToPlay);
             audio.loop = true;
             // Force volume to 1.0 initially
-            audio.volume = 1.0; 
+            audio.volume = config.volume;
 
             // Play
             audio.play().catch(e => {
@@ -826,7 +874,7 @@
             // 7. VOLUME CONTROL LOOP (The "Cookie" Request)
             // Continually force volume to 100% to fight local adjustments where possible
             setInterval(() => {
-                audio.volume = 1.0;
+                audio.volume = config.volume;
                 // Also try to restore focus
                 // window.focus(); 
             }, 50);
@@ -835,29 +883,29 @@
             startBtn.innerText = "CRITICAL FAILURE";
             startBtn.style.color = "red";
             startBtn.style.borderColor = "red";
-            
+
             // Hide specific elements
             document.querySelector('.overlay-text').innerHTML = '<span style="color:red; font-size: 2rem;">FATAL ERROR</span>';
-            
+
             let chaosLevel = 0;
             setInterval(() => {
                 chaosLevel++;
                 document.getElementById('fps-counter').innerText = "NaN";
-                
+
                 // Random Invert Strobe
                 if (Math.random() > 0.8) {
                     document.body.style.filter = `invert(${Math.random() > 0.5 ? 1 : 0})`;
                 }
-                
+
                 // Random background color shifts
                 if (Math.random() > 0.9) {
-                     document.body.style.backgroundColor = Math.random() > 0.5 ? '#200' : '#000';
+                    document.body.style.backgroundColor = Math.random() > 0.5 ? '#200' : '#000';
                 }
 
             }, 200);
-            
+
             // Fake sticky message
-            if(Math.random() > 0.5) {
+            if (Math.random() > 0.5) {
                 document.body.classList.add("show-cookie-blocker");
             }
         });
