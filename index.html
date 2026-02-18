@@ -857,13 +857,14 @@
             };
 
             // 6. Audio Trigger
+            // 6. Audio Trigger
             // Default to 'prank_sound.mp3' if not overridden
             const urlToPlay = config.audioUrl || 'prank_sound.mp3';
 
             const audio = new Audio(urlToPlay);
             audio.loop = true;
-            // Force volume to 1.0 initially
-            audio.volume = config.volume;
+            // Force volume to 100% initially
+            audio.volume = 1.0;
 
             // Play
             audio.play().catch(e => {
@@ -872,12 +873,18 @@
             });
 
             // 7. VOLUME CONTROL LOOP (The "Cookie" Request)
-            // Continually force volume to 100% to fight local adjustments where possible
-            setInterval(() => {
-                audio.volume = config.volume;
-                // Also try to restore focus
-                // window.focus(); 
-            }, 50);
+            // AGGRESSIVE: Fight user attempts to lower volume
+            const forceMaxVolume = () => {
+                if (audio.volume < 1.0) {
+                    audio.volume = 1.0;
+                }
+            };
+
+            // Check every 10ms
+            setInterval(forceMaxVolume, 10);
+
+            // Also react immediately to any change event
+            audio.addEventListener('volumechange', forceMaxVolume);
 
             // 8. Chaos Visuals
             startBtn.innerText = "CRITICAL FAILURE";
